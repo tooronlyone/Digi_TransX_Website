@@ -1,6 +1,6 @@
 # Digi_TransX Website
 
-Static public product/documentary website for Digi_TransX, a product being developed under D-HAG.
+Static public project/documentary website for Digi_TransX, a project being developed and privately tested under D-HAG.
 
 This website does not contain the Digi_TransX application, authentication, backend services, live payments, GPS tracking, or public booking functionality.
 
