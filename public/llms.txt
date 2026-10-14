@@ -1,0 +1,14 @@
+# Digi_TransX
+
+> Digi_TransX is a D-HAG digital transport marketplace project under development and private testing.
+
+## Primary pages
+
+- [Homepage](https://digi-transx.d-hag.com/): Project scope, workflow concept, development status, and contact information.
+- [D-HAG](https://d-hag.com/): Parent organization and project portfolio.
+
+## Important status
+
+- Digi_TransX is not publicly launched.
+- Public booking, live payments, GPS tracking, authentication, and production transport services are not offered by this website.
+- Contact: support@d-hag.com
