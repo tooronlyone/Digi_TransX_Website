@@ -3,22 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found &mdash; Digi_TransX</title>
   <meta name="robots" content="noindex">
-  <title>Page Not Found | Digi_TransX</title>
-  <link rel="icon" type="image/png" href="/assets/digi-transx-favicon-64.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/digi-transx-favicon-64.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;700&amp;family=Big+Shoulders+Display:wght@800;900&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <main class="not-found-page">
-    <img src="/assets/digi-transx-logo.webp" alt="Digi_TransX" class="not-found-logo">
-    <p class="eyebrow">404 / Page not found</p>
-    <h1>This route does not exist.</h1>
-    <p>The Digi_TransX public website is a focused project overview. Return to the homepage to continue.</p>
-    <a class="button button-dark" href="/">Return home</a>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand-lockup" href="/">
+        <img class="brand-seal" src="/assets/digi-transx-logo.webp" alt="Digi_TransX emblem" width="64" height="32">
+        <span class="brand-copy">
+          <span class="brand-wordmark">Digi_TransX</span>
+          <span class="brand-origin">Transport Operations by D-HAG</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="error-main">
+    <div class="container">
+      <section class="error-packet" aria-labelledby="not-found-title">
+        <h1 id="not-found-title">404 &mdash; Route Slip Not Found</h1>
+        <p>The page or resource requested is unavailable on Digi_TransX. Return to the main dispatch overview or contact D-HAG for test-pilot information.</p>
+        <div class="hero-actions" style="justify-content: center;">
+          <a class="btn btn-vermilion" href="/">Return Home</a>
+          <a class="btn btn-paper" href="mailto:support@d-hag.com?subject=Digi_TransX%20Inquiry">Contact D-HAG</a>
+        </div>
+      </section>
+    </div>
   </main>
 </body>
 </html>

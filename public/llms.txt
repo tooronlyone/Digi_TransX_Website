@@ -1,14 +1,19 @@
 # Digi_TransX
+> Honest pre-launch product overview under D-HAG (https://digi-transx.d-hag.com/)
 
-> Digi_TransX is a D-HAG digital transport marketplace project under development and private testing.
+## What Digi_TransX Covers
+Digi_TransX is a digital transport marketplace under D-HAG built from family transport-operations experience. This public site explains the live one-time shipment workflow conceptually without exposing private pricing percentages, penalty rules, internal reserve minimums, or unlaunched modules.
 
-## Primary pages
+## One-Time Shipment Workflow
+1. Everyday and business seekers post structured shipment requirements.
+2. Rule-based truck compatibility filtering surfaces open loads only to eligible fleets in service range without automatic dispatch overrides.
+3. Fleet transporters submit open vehicle-backed bids so seekers compare trucks, history, and rates transparently.
+4. Accepted offers move into a test escrow checkout hold concept.
+5. Transporters dispatch contracted drivers (per-trip or permanent hire) or enable verified Owner-Operator self-drive mode ("Drive Myself"). Drivers execute one active accepted trip at a time and may never post marketplace orders or bid independently.
+6. Cargo delivery uses physical inspection first followed by a one-time completion OTP to unlock staged internal settlement, or opens a frozen dispute under contextual chat and admin arbitration.
 
-- [Homepage](https://digi-transx.d-hag.com/): Project scope, workflow concept, development status, and contact information.
-- [D-HAG](https://d-hag.com/): Parent organization and project portfolio.
-
-## Important status
-
-- Digi_TransX is not publicly launched.
-- Public booking, live payments, GPS tracking, authentication, and production transport services are not offered by this website.
-- Contact: support@d-hag.com
+## Honest Pre-Launch Status
+- Stage: Private internal testing; not publicly launched.
+- Checkout: Uses dummy test-card flows only (no live payment gateway or bank payouts yet).
+- Tracking: External vehicle GPS tracker hardware integration remains offline/planned; internal builds use trip-scoped smartphone check-ins only during accepted active driver runs.
+- Security & Polish: Auth, session/device controls, secondary PIN hardening, and frontend-backend alignment remain under active refinement.
