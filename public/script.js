@@ -203,4 +203,207 @@
     });
   });
 
+  /* 6. UTM Attribution + Privacy-First Page View Beacon */
+  const UTM_KEY = 'dhag_transx_utm_v1';
+  const readUtms = () => {
+    let saved = {};
+    try {
+      saved = JSON.parse(sessionStorage.getItem(UTM_KEY) || '{}') || {};
+    } catch {}
+    const params = new URLSearchParams(window.location.search);
+    const utm = {
+      utm_source: params.get('utm_source') || saved.utm_source || 'direct',
+      utm_medium: params.get('utm_medium') || saved.utm_medium || '',
+      utm_campaign: params.get('utm_campaign') || saved.utm_campaign || '',
+      utm_content: params.get('utm_content') || saved.utm_content || ''
+    };
+    try {
+      sessionStorage.setItem(UTM_KEY, JSON.stringify(utm));
+    } catch {}
+    return utm;
+  };
+
+  const utms = readUtms();
+  try {
+    let refHost = '';
+    try {
+      refHost = document.referrer ? new URL(document.referrer).hostname : '';
+    } catch {}
+    fetch('https://metrics.d-hag.com/e', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
+      mode: 'cors',
+      body: JSON.stringify({
+        event: 'page_view',
+        site: window.location.hostname || 'digi-transx.d-hag.com',
+        path: window.location.pathname || '/',
+        utm_source: utms.utm_source,
+        utm_medium: utms.utm_medium,
+        utm_campaign: utms.utm_campaign,
+        utm_content: utms.utm_content,
+        target: window.location.pathname || '/',
+        referrer_host: refHost
+      })
+    }).catch(() => {});
+  } catch {}
+
+  /* 7. Founding Pilot Early Access Registration Form */
+  const eaForm = document.getElementById('early-access-form');
+  const eaCity = document.getElementById('ea-city');
+  const eaOtherWrap = document.getElementById('ea-other-city-wrap');
+  const eaOtherCity = document.getElementById('ea-other-city');
+  const eaWhatsapp = document.getElementById('ea-whatsapp');
+  const eaName = document.getElementById('ea-name');
+  const eaDetail = document.getElementById('ea-detail');
+  const eaDetailLabel = document.getElementById('ea-detail-label');
+  const eaHp = document.getElementById('ea-hp-field');
+  const eaError = document.getElementById('ea-error');
+  const eaSubmit = document.getElementById('ea-submit-btn');
+  const eaSuccess = document.getElementById('ea-success');
+  const eaSpotBadge = document.getElementById('ea-spot-badge');
+  const eaSuccessTitle = document.getElementById('ea-success-title');
+  const eaSuccessCopy = document.getElementById('ea-success-copy');
+  const eaResetBtn = document.getElementById('ea-reset-btn');
+
+  const ROLE_DETAIL_PROMPTS = {
+    cargo_sender: {
+      label: 'Typical Cargo / Monthly Loads',
+      placeholder: 'e.g. Textile cartons, 8–10 loads/month'
+    },
+    fleet_owner: {
+      label: 'Fleet Size & Truck Types',
+      placeholder: 'e.g. 5 trucks — Mazda, 10-Wheeler, Container'
+    },
+    driver: {
+      label: 'License Type & Experience',
+      placeholder: 'e.g. HTV license, Lahore–Karachi route'
+    }
+  };
+
+  if (eaForm) {
+    const syncRoleCopy = () => {
+      const checked = eaForm.querySelector('input[name="role"]:checked');
+      const roleVal = checked ? checked.value : 'cargo_sender';
+      const prompt = ROLE_DETAIL_PROMPTS[roleVal] || ROLE_DETAIL_PROMPTS.cargo_sender;
+      if (eaDetailLabel) {
+        eaDetailLabel.innerHTML = `${prompt.label} <span class="ea-opt">(Optional)</span>`;
+      }
+      if (eaDetail) eaDetail.placeholder = prompt.placeholder;
+    };
+
+    eaForm.querySelectorAll('input[name="role"]').forEach((radio) => {
+      radio.addEventListener('change', syncRoleCopy);
+    });
+    syncRoleCopy();
+
+    if (eaCity && eaOtherWrap && eaOtherCity) {
+      eaCity.addEventListener('change', () => {
+        const isOther = eaCity.value === 'Other';
+        eaOtherWrap.hidden = !isOther;
+        eaOtherCity.required = isOther;
+        if (isOther) eaOtherCity.focus();
+      });
+    }
+
+    const showError = (message) => {
+      if (!eaError) return;
+      eaError.textContent = message;
+      eaError.hidden = !message;
+    };
+
+    eaForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showError('');
+
+      const checkedRole = eaForm.querySelector('input[name="role"]:checked');
+      const role = checkedRole ? checkedRole.value : '';
+      const rawCity = eaCity ? eaCity.value : '';
+      const cityRoute = rawCity === 'Other' ? (eaOtherCity?.value || '').trim() : rawCity.trim();
+      const whatsapp = (eaWhatsapp?.value || '').trim();
+
+      if (!role) {
+        showError('Please choose your role first.');
+        return;
+      }
+      if (!cityRoute || cityRoute.length < 2) {
+        showError('Please choose or enter your primary city or freight corridor.');
+        (rawCity === 'Other' ? eaOtherCity : eaCity)?.focus();
+        return;
+      }
+
+      const digitsOnly = whatsapp.replace(/[^\d+]/g, '');
+      if (!/^(\+?92|0092|0)?3\d{9}$/.test(digitsOnly)) {
+        showError('Please enter a valid Pakistani WhatsApp number (e.g. 0300 1234567 or +92 300 1234567).');
+        eaWhatsapp?.focus();
+        return;
+      }
+
+      if (eaSubmit) {
+        eaSubmit.disabled = true;
+        eaSubmit.textContent = 'Reserving your spot…';
+      }
+
+      try {
+        const latestUtm = readUtms();
+        const res = await fetch('https://pilot.d-hag.com/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          mode: 'cors',
+          body: JSON.stringify({
+            role,
+            city_route: cityRoute,
+            whatsapp,
+            full_name: (eaName?.value || '').trim(),
+            detail: (eaDetail?.value || '').trim(),
+            company_website: (eaHp?.value || '').trim(),
+            utm_source: latestUtm.utm_source,
+            utm_medium: latestUtm.utm_medium,
+            utm_campaign: latestUtm.utm_campaign,
+            utm_content: latestUtm.utm_content,
+            source_page: window.location.pathname || '/'
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || 'Could not save your registration right now. Please try again.');
+        }
+
+        if (eaSpotBadge) {
+          eaSpotBadge.textContent = data.already_registered
+            ? `Spot #${data.spot_number} Updated · Already Registered`
+            : `Founding Pilot Spot #${data.spot_number} Reserved`;
+        }
+        if (eaSuccessTitle) {
+          eaSuccessTitle.textContent = data.already_registered
+            ? 'Your Founding Pilot details are up to date.'
+            : 'You are on the Digi_TransX Founding Pilot List.';
+        }
+        if (eaSuccessCopy) {
+          eaSuccessCopy.textContent = `Registered as ${data.role_label || role} for ${cityRoute}. No password or app login is needed right now—our team will message your WhatsApp when closed pilot access opens on your corridor.`;
+        }
+        eaForm.hidden = true;
+        if (eaSuccess) eaSuccess.hidden = false;
+      } catch (err) {
+        showError(err instanceof Error ? err.message : 'Unable to connect right now. Please try again.');
+      } finally {
+        if (eaSubmit) {
+          eaSubmit.disabled = false;
+          eaSubmit.textContent = 'Reserve Founding Pilot Spot';
+        }
+      }
+    });
+
+    if (eaResetBtn && eaSuccess) {
+      eaResetBtn.addEventListener('click', () => {
+        eaForm.reset();
+        if (eaOtherWrap) eaOtherWrap.hidden = true;
+        syncRoleCopy();
+        showError('');
+        eaSuccess.hidden = true;
+        eaForm.hidden = false;
+      });
+    }
+  }
+
 })();

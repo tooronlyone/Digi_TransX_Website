@@ -70,7 +70,7 @@
         <a href="#roles">Roles &amp; Driver Rules</a>
         <a href="#protections">Fairness &amp; OTP</a>
         <a href="#honest-status">Honest Status</a>
-        <a class="btn btn-vermilion btn-sm" href="mailto:support@d-hag.com?subject=Digi_TransX%20Inquiry">Contact D-HAG</a>
+        <a class="btn btn-vermilion btn-sm" href="#early-access">Join Early Access</a>
       </nav>
     </div>
   </header>
@@ -86,8 +86,8 @@
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-vermilion" href="#workflow">Trace the One-Time Flow</a>
-            <a class="btn btn-paper" href="#honest-status">Inspect Pre-Launch Truth</a>
+            <a class="btn btn-vermilion" href="#early-access">Join Founding Pilot (Free)</a>
+            <a class="btn btn-paper" href="#workflow">Trace the One-Time Flow</a>
           </div>
 
           <dl class="almanac-ledger" aria-label="Platform snapshot">
@@ -533,8 +533,113 @@
         </div>
 
         <div class="status-disclaimer">
-          <p>Evaluating Digi_TransX? Treat everything described above strictly as our active one-time dispatch design and internal testing status under D-HAG&mdash;not a claim of open commercial processing.</p>
-          <a class="btn btn-vermilion" href="#contact">Ask About Private Testing</a>
+          <p>Evaluating Digi_TransX? Public commercial booking is offline during internal hardening—reserve a founding pilot spot below so our team can invite regional shippers and fleets first via WhatsApp.</p>
+          <a class="btn btn-vermilion" href="#early-access">Reserve Early Access Spot</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="early-access-band" id="early-access" aria-labelledby="early-access-title">
+      <div class="container">
+        <div class="ea-shell">
+          <div class="ea-intro">
+            <span class="ea-kicker">Founding Pilot Queue &middot; Zero Password &middot; Zero CNIC</span>
+            <h2 id="early-access-title">Join Digi_TransX Early Access</h2>
+            <p class="ea-lead">Priority closed-pilot rollout begins across <strong>Lahore, Faisalabad, Gujranwala / Sialkot</strong>, and the <strong>Karachi &harr; Lahore</strong> freight corridor. Register in 20 seconds so you get first access before public launch—no brokers, no spam.</p>
+            <ul class="ea-points">
+              <li><strong>Cargo Senders &amp; Factories:</strong> Compare direct vehicle-backed bids openly and release payment only after physical inspection + OTP.</li>
+              <li><strong>Fleet &amp; Truck Owners (2–20+ trucks):</strong> See compatible loads on your routes and reduce empty return trips (<em>khali wapsi</em>).</li>
+              <li><strong>Commercial Drivers:</strong> Get notified when verified fleet onboarding opens on your corridor.</li>
+            </ul>
+            <p class="ea-honest-note">Honest note: This is a pre-launch pilot registration list, not a live booking account. We only use your WhatsApp number to send your closed-pilot invite when your route opens.</p>
+          </div>
+
+          <div class="ea-card">
+            <form class="ea-form" id="early-access-form" novalidate>
+              <fieldset class="ea-role-group">
+                <legend class="ea-label">1. Select Your Role <span aria-hidden="true">*</span></legend>
+                <div class="ea-role-grid">
+                  <label class="ea-role-option">
+                    <input type="radio" name="role" value="cargo_sender" checked>
+                    <span class="ea-role-box">
+                      <strong>Cargo Sender</strong>
+                      <small>Factory, Exporter, Trader</small>
+                    </span>
+                  </label>
+                  <label class="ea-role-option">
+                    <input type="radio" name="role" value="fleet_owner">
+                    <span class="ea-role-box">
+                      <strong>Fleet / Truck Owner</strong>
+                      <small>Own 1–20+ Commercial Trucks</small>
+                    </span>
+                  </label>
+                  <label class="ea-role-option">
+                    <input type="radio" name="role" value="driver">
+                    <span class="ea-role-box">
+                      <strong>Commercial Driver</strong>
+                      <small>HTV / LTV Licensed Driver</small>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="ea-field">
+                <label class="ea-label" for="ea-city">2. Primary City / Freight Corridor <span aria-hidden="true">*</span></label>
+                <select class="ea-input" id="ea-city" name="city_route" required>
+                  <option value="">Choose your main hub or route…</option>
+                  <option value="Lahore">Lahore (Badami Bagh / Sundar / Kot Lakhpat / Shahdara)</option>
+                  <option value="Faisalabad">Faisalabad (Textile / Industrial Cargo)</option>
+                  <option value="Gujranwala / Sialkot">Gujranwala / Sialkot Industrial Belt</option>
+                  <option value="Karachi <-> Lahore Corridor">Karachi &harr; Lahore Main Freight Corridor</option>
+                  <option value="Karachi">Karachi (SITE / Maripur / Port Qasim)</option>
+                  <option value="Islamabad / Rawalpindi">Islamabad / Rawalpindi</option>
+                  <option value="Multan">Multan / South Punjab</option>
+                  <option value="Other">Other Pakistan City / Route</option>
+                </select>
+              </div>
+
+              <div class="ea-field" id="ea-other-city-wrap" hidden>
+                <label class="ea-label" for="ea-other-city">Enter Your City / Route <span aria-hidden="true">*</span></label>
+                <input class="ea-input" id="ea-other-city" type="text" maxlength="70" placeholder="e.g. Peshawar ↔ Lahore or Sahiwal">
+              </div>
+
+              <div class="ea-field">
+                <label class="ea-label" for="ea-whatsapp">3. WhatsApp Number (Pakistan) <span aria-hidden="true">*</span></label>
+                <input class="ea-input" id="ea-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="0300 1234567 or +92 300 1234567">
+                <small class="ea-hint">We send closed-pilot invites directly on WhatsApp (no passwords or emails needed).</small>
+              </div>
+
+              <div class="ea-two-col">
+                <div class="ea-field">
+                  <label class="ea-label" for="ea-name">Name / Business <span class="ea-opt">(Optional)</span></label>
+                  <input class="ea-input" id="ea-name" name="full_name" type="text" maxlength="60" autocomplete="name" placeholder="e.g. Ali Raza / Al-Noor Textiles">
+                </div>
+                <div class="ea-field">
+                  <label class="ea-label" for="ea-detail" id="ea-detail-label">Typical Cargo / Monthly Loads <span class="ea-opt">(Optional)</span></label>
+                  <input class="ea-input" id="ea-detail" name="detail" type="text" maxlength="110" placeholder="e.g. Cartons, 8–10 loads/month">
+                </div>
+              </div>
+
+              <div class="ea-hp" aria-hidden="true">
+                <label for="ea-hp-field">Company website</label>
+                <input id="ea-hp-field" name="company_website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="ea-alert" id="ea-error" role="alert" hidden></div>
+
+              <button class="btn btn-vermilion ea-submit" id="ea-submit-btn" type="submit">Reserve Founding Pilot Spot</button>
+            </form>
+
+            <div class="ea-success" id="ea-success" hidden role="status" aria-live="polite">
+              <div class="ea-success-badge" id="ea-spot-badge">Founding Pilot Spot Reserved</div>
+              <h3 id="ea-success-title">You are on the Digi_TransX Founding Pilot List.</h3>
+              <p id="ea-success-copy">Our team will message your WhatsApp directly when closed pilot onboarding opens on your route. Meanwhile, follow our official WhatsApp Channel for launch updates.</p>
+              <div class="ea-success-actions">
+                <a class="btn btn-vermilion" href="https://whatsapp.com/channel/0029VbDHwuh47Xe2fEYmaG3g" target="_blank" rel="noopener noreferrer">Join D-HAG WhatsApp Channel &#8599;</a>
+                <button class="btn btn-paper" type="button" id="ea-reset-btn">Register Another Contact</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
